@@ -1,0 +1,59 @@
+NORMÁL:
+
+PIROS: rgb(255, 0, 0)
+FEHÉR: rgb(255, 255, 255)
+KÉK: rgb(0, 0, 255)
+RÓZSASZÍN: rgb(255, 192, 203)
+NARANCS: rgb(255, 165, 0)
+LILA: rgb(128, 0, 128)
+SÁRGA: rgb(255, 255, 0)
+ZÖLD: rgb(0, 128, 0)
+
+
+
+PROTANOPIA (vörös tévesztés):
+PIROS: rgb(255, 100, 50)
+FEHÉR: rgb(255, 255, 255)
+KÉK: rgb(0, 0, 255)
+RÓZSASZÍN: rgb(255, 150, 230)
+NARANCS: rgb(255, 170, 80)
+LILA: rgb(140, 50, 230)
+SÁRGA: rgb(255, 255, 0)
+ZÖLD: rgb(0, 200, 150)
+
+
+
+DEUTRANOPIA (zöld tévesztés):
+PIROS: rgb(200, 50, 50)
+FEHÉR: rgb(255, 255, 255)
+KÉK: rgb(0, 0, 255)
+RÓZSASZÍN: rgb(255, 150, 200)
+NARANCS: rgb(255, 140, 0)
+LILA: rgb(150, 0, 200)
+SÁRGA: rgb(255, 255, 0)
+ZÖLD: rgb(0, 170, 170)
+
+
+
+TRITANOPIA (kék-sárga tévesztés):
+PIROS: rgb(255, 0, 0)
+FEHÉR: rgb(255, 255, 255)
+KÉK: rgb(140, 0, 255)
+RÓZSASZÍN: rgb(255, 120, 180)
+NARANCS: rgb(255, 100, 50)
+LILA: rgb(200, 50, 200)
+SÁRGA: rgb(150, 200, 0)
+ZÖLD: rgb(0, 150, 100)
+
+
+
+ACHROMATOPSIA (teljes színvakság):
+alternatíva
+
+
+
+
+
+
+
+
