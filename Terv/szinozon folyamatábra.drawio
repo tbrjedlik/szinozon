@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="24.9.1">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1222" dy="657" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1485" dy="728" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -127,7 +127,7 @@
             <mxPoint x="-243" y="630" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="AWrgmrOuO5pUWe4rCcrW-47" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;pl. ami eddig kék volt az piros lesz, kitalálandó kombináció is eszerint változik (30mp)&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="AWrgmrOuO5pUWe4rCcrW-47" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;pl. ami eddig kék volt az piros lesz, kitalálandó kombináció is eszerint változik (45mp)&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-320" y="730" width="200" height="30" as="geometry" />
         </mxCell>
         <mxCell id="AWrgmrOuO5pUWe4rCcrW-49" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;grid&lt;/h1&gt;&lt;p&gt;(kitalálandó színek száma)x(próbálkozási lehetőségek száma)&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
