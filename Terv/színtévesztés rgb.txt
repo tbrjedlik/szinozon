@@ -1,5 +1,4 @@
 NORMÁL:
-
 PIROS: rgb(255, 0, 0)
 FEHÉR: rgb(255, 255, 255)
 KÉK: rgb(0, 0, 255)
@@ -48,12 +47,5 @@ ZÖLD: rgb(0, 150, 100)
 
 
 ACHROMATOPSIA (teljes színvakság):
-alternatíva
-
-
-
-
-
-
-
-
+Egyszerű szimbólumok használata
+(háromszög, négyszög, kör stb.)
