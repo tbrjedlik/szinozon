@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teszt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="gameStartup()">
+    <div class="terulet">
+        <div id="megfejtes">
+            <div class="kocka" id="a1"></div>
+            <div class="kocka" id="a2"></div>
+            <div class="kocka" id="a3"></div>
+            <div class="kocka" id="a4"></div>
+        </div>
+        <div id="valasz">
+            <div class="sor">
+                <div class="kocka" id="1v1" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+                <div class="kocka" id="1v2" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+                <div class="kocka" id="1v3" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+                <div class="kocka" id="1v4" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+            </div>
+            <div class="sor">
+                <div class="kocka" id="2v1" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+                <div class="kocka" id="2v2" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+                <div class="kocka" id="2v3" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+                <div class="kocka" id="2v4" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+            </div>
+            <div class="sor">
+                <div class="kocka" id="3v1" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+                <div class="kocka" id="3v2" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+                <div class="kocka" id="3v3" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+                <div class="kocka" id="3v4" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="szinek">
+        <div draggable="true" ondragstart="colorDragStart(event, 'blue')" ondragover="allowDrop(event)" class="kocka szin-kocka" id="kek"></div>
+        <div draggable="true" ondragstart="colorDragStart(event, 'yellow')" ondragover="allowDrop(event)" class="kocka szin-kocka" id="sarga"></div>
+        <div draggable="true" ondragstart="colorDragStart(event, 'red')" ondragover="allowDrop(event)" class="kocka szin-kocka" id="piros"></div>
+        <div draggable="true" ondragstart="colorDragStart(event, 'purple')" ondragover="allowDrop(event)" class="kocka szin-kocka" id="lila"></div>
+    </div>
+
+
+    <button onclick="asd()">asd</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

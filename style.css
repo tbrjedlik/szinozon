@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.kocka{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    margin: 5px;
+}
+#valasz{
+    margin-top: 10px;
+}
+.terulet,#valasz{
+    display: flex;
+    flex-direction: column;
+}
+#megfejtes,  .sor{
+    display: flex;
+    flex-direction: row;
+}
+
+.szinek{
+    display: flex;
+    margin-top: 20px;
+}
+#kek{
+    background-color: blue;
+}
+#piros{
+    background-color: red;
+}
+#sarga{
+    background-color: yellow;
+}
+#lila{
+    background-color: purple;
+}
+
