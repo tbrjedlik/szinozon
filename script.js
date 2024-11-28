@@ -1,6 +1,9 @@
 const colors = ["red", "white", "blue", "pink", "orange", "purple", "yellow", "green"];
 let guessColors= ["", "", "", ""]
 
+let isProtanopiaMode = false;
+
+
 function allowDrop(event){
     event.preventDefault();
 }
@@ -76,4 +79,19 @@ function newGame(){
     }
     gameStartup();
 
+}
+
+
+function toggleProtanopiaMode() {
+    isProtanopiaMode = !isProtanopiaMode;
+
+    const szineselemek = document.querySelectorAll('#piros, #kek, #sarga, #lila, #zold, #sarga, #feher, #rozsaszin');
+
+    szineselemek.forEach(element => {
+        if (isProtanopiaMode) {
+            element.classList.add('protanopia');
+        } else {
+            element.classList.remove('protanopia');
+        }
+    });
 }
