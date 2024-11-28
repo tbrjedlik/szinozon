@@ -1,6 +1,5 @@
-const colors = ["blue", "yellow", "red", "purple"]
+const colors = ["red", "white", "blue", "pink", "orange", "purple", "yellow", "green"];
 let guessColors= ["", "", "", ""]
-//Math.floor(Math.random() * 4)
 
 function allowDrop(event){
     event.preventDefault();
@@ -40,34 +39,37 @@ function colorDropped(event){
 }
 
 
-function gameCheck(sor){
-    let tipColors = ["", "", "", ""]
-    let guessed = 0
-    for(let i = 0; i < 4; i++){
-        tipColors[i] = document.getElementById(`${sor}v${i+1}`).style.backgroundColor
-        if (tipColors[i] == guessColors[i]){
-            console.log(`${i+1}. szín talált`)      //TODO: Talált lekezel
-            guessed += 1;       
-        }
-        else if (guessColors.includes(tipColors[i])){
-            console.log(`${i+1}. szín talált, de nem jó helyen`)    //TODO: Talált, de nem jó hely lekezel
+function gameCheck(sor) {
+    let tipColors = ["", "", "", ""];
+    let guessed = 0;
+
+    for (let i = 0; i < 4; i++) {
+        tipColors[i] = document.getElementById(`${sor}v${i+1}`).style.backgroundColor || "";
+    }
+
+    if (tipColors.includes("")) {
+        return;
+    }
+
+    for (let i = 0; i < 4; i++) {
+        if (tipColors[i] === guessColors[i]) {
+            guessed++;
         }
     }
-    if(guessed == 4){
-        console.log("Guessed!") //TODO: Pontszámolás stb.
-        for(let i = 0; i < 4; i++){
-            document.getElementById(`a${i+1}`).style.backgroundColor = guessColors[i]
+
+    if (guessed === 4) {
+        for (let i = 0; i < 4; i++) {
+            document.getElementById(`a${i+1}`).style.backgroundColor = guessColors[i];
         }
-    }
-    else if (sor == 3){
-        for(let i = 0; i < 4; i++){
-            document.getElementById(`a${i+1}`).style.backgroundColor = guessColors[i]
+    } else if (sor == 3) {
+        for (let i = 0; i < 4; i++) {
+            document.getElementById(`a${i+1}`).style.backgroundColor = guessColors[i];
         }
-        console.log("Nem talált!")
     }
 }
 
-function asd(){
+
+function newGame(){
     let kockak = document.getElementsByClassName("kocka");
     for (let i = 0; i < kockak.length; i++) {
         kockak[i].style.backgroundColor = "";

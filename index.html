@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teszt</title>
+    <title>Színkitalálós Játék</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body onload="gameStartup()">
@@ -37,14 +37,17 @@
     </div>
 
     <div class="szinek">
-        <div draggable="true" ondragstart="colorDragStart(event, 'blue')" ondragover="allowDrop(event)" class="kocka szin-kocka" id="kek"></div>
-        <div draggable="true" ondragstart="colorDragStart(event, 'yellow')" ondragover="allowDrop(event)" class="kocka szin-kocka" id="sarga"></div>
-        <div draggable="true" ondragstart="colorDragStart(event, 'red')" ondragover="allowDrop(event)" class="kocka szin-kocka" id="piros"></div>
-        <div draggable="true" ondragstart="colorDragStart(event, 'purple')" ondragover="allowDrop(event)" class="kocka szin-kocka" id="lila"></div>
+        <div draggable="true" ondragstart="colorDragStart(event, 'blue')" class="kocka szin-kocka" id="kek"></div>
+        <div draggable="true" ondragstart="colorDragStart(event, 'yellow')" class="kocka szin-kocka" id="sarga"></div>
+        <div draggable="true" ondragstart="colorDragStart(event, 'red')" class="kocka szin-kocka" id="piros"></div>
+        <div draggable="true" ondragstart="colorDragStart(event, 'purple')" class="kocka szin-kocka" id="lila"></div>
+        <div draggable="true" ondragstart="colorDragStart(event, 'white')" class="kocka szin-kocka" id="feher"></div>
+        <div draggable="true" ondragstart="colorDragStart(event, 'pink')" class="kocka szin-kocka" id="rozsaszin"></div>
+        <div draggable="true" ondragstart="colorDragStart(event, 'orange')" class="kocka szin-kocka" id="narancs"></div>
+        <div draggable="true" ondragstart="colorDragStart(event, 'green')" class="kocka szin-kocka" id="zold"></div>
     </div>
 
-
-    <button onclick="asd()">asd</button>
+    <button onclick="newGame()">Új játék</button>
 
     <script src="script.js"></script>
 </body>

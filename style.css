@@ -1,40 +1,67 @@
-*{
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.kocka{
+body{background-color: beige;}
+
+.kocka {
     width: 50px;
     height: 50px;
     border: 1px solid black;
     margin: 5px;
 }
-#valasz{
+
+#valasz {
     margin-top: 10px;
 }
-.terulet,#valasz{
+
+.terulet, #valasz {
     display: flex;
     flex-direction: column;
 }
-#megfejtes,  .sor{
+
+#megfejtes, .sor {
     display: flex;
     flex-direction: row;
 }
 
-.szinek{
+.szinek {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 20px;
 }
-#kek{
+
+#kek {
     background-color: blue;
 }
-#piros{
+
+#piros {
     background-color: red;
 }
-#sarga{
+
+#sarga {
     background-color: yellow;
 }
-#lila{
+
+#lila {
     background-color: purple;
 }
 
+#feher {
+    background-color: white;
+    border: 1px solid black; /* Láthatóság érdekében */
+}
+
+#rozsaszin {
+    background-color: pink;
+}
+
+#narancs {
+    background-color: orange;
+}
+
+#zold {
+    background-color: green;
+}
