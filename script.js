@@ -8,7 +8,9 @@ function allowDrop(event){
     event.preventDefault();
 }
 function colorDragStart(event, color){
+    // console.log(event);
     event.dataTransfer.setData("color", color);
+    event.dataTransfer.setData("class", event.srcElement.classList[1])
 }
 
 function gameStartup(){
@@ -22,11 +24,12 @@ function gameStartup(){
 
 
 function colorDropped(event){
-    console.log(event)
+    // console.log(event)
     const kockaid = event.toElement.id
     if (kockaid.substring(0,1) == "1"){
         if (kockaid.substring(2,3) == "1" || document.getElementById(`1v${Number(kockaid.substring(2,3))-1}`).style.backgroundColor != ""){
-            document.getElementById(kockaid).style.backgroundColor = event.dataTransfer.getData("color")
+            if  (event.dataTransfer.getData("class") == "szin-kocka")
+                document.getElementById(kockaid).style.backgroundColor = event.dataTransfer.getData("color")
         }
     }
     else if(document.getElementById(`${Number(kockaid.substring(0,1))-1}v4`).style.backgroundColor != ""){
