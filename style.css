@@ -1,3 +1,15 @@
+:root{
+    --blue: blue;
+    --red: red;
+    --yellow: yellow;
+    --purple: purple;
+    --white: white;
+    --pink: pink;
+    --orange: orange;
+    --green: green;
+    
+}
+
 * {
     margin: 0;
     padding: 0;
