@@ -3,6 +3,11 @@ const magyarSzinek = ["kék", "sárga", "piros", "lila", "fehér", "rózsaszín"
 let guessColors = ["", "", "", ""]
 let tippedColors = []
 
+let sorSzam = 3;
+let szinSzam = 4;
+
+let isProtanopiaMode = false;
+
 
 function allowDrop(event) {
     event.preventDefault();
@@ -12,37 +17,76 @@ function colorDragStart(event, color) {
     event.dataTransfer.setData("color", color);
     event.dataTransfer.setData("class", event.srcElement.classList[1])
 }
-
+function newGame() {
+    gameStartup();
+}
 function gameStartup() {
-    for (let i = 0; i < 4; i++) {
-        guessColors[i] = colors[Math.floor(Math.random() * 4)]
+    kockakFeltoltes()
+    pottyClear()
+    for (let i = 0; i < szinSzam; i++) {
+        guessColors[i] = colors[Math.floor(Math.random() * colors.length)]
         console.log(guessColors[i])
     }
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < szinSzam; i++) {
         document.getElementById(`a${i + 1}`).innerText = "?"
     }
     Szinezes = '1v1'
 }
 
+function kockakFeltoltes(){
+    const megfejtDiv = document.getElementById("megfejtes");
+    megfejtDiv.innerHTML = "";
+    const valaszDiv = document.getElementById("valasz");
+    valaszDiv.innerHTML = "";
+    for(let i = 0; i < szinSzam; i++) {
+        megfejtDiv.innerHTML += `<div class='kocka' id="a${i+1}"></div>`
+    }
+    for(let i = 0; i < sorSzam; i++){
+        valaszDiv.innerHTML += "<div class='sor'></div>"
+    }    
+    const sorok = document.querySelectorAll("div.sor");
+    for(let i = 0; i < sorSzam; i++){
+        const sor = sorok[i];
+        for(let j = 0; j < szinSzam; j++) {
+            sor.innerHTML += `<div class="kocka" id="${i+1}v${j+1}" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>`
+        }
+        for(let j = 0; j < szinSzam; j++) {
+            sor.innerHTML += `<div class="potty" id="p${i+1}${j+1}"></div>`;    //KÉSŐBB VISSZAÁLLÍTANI
+        }
+    }
+}
 
 function colorDropped(event) {
     // console.log(event)
     const kockaid = event.toElement.id
     if (kockaid.substring(0, 1) == "1") {
         if (kockaid.substring(2, 3) == "1" || document.getElementById(`1v${Number(kockaid.substring(2, 3)) - 1}`).style.backgroundColor != "") {
-            if (event.dataTransfer.getData("class") == "szin-kocka")
-                document.getElementById(kockaid).style.backgroundColor = `var(--${event.dataTransfer.getData("color")})`
-            tippedColors[Number(kockaid.substring(2, 3) - 1)] = event.dataTransfer.getData("color");
+            if (event.dataTransfer.getData("class") == "szin-kocka"){
+                if(document.getElementById(kockaid).style.backgroundColor == "" ||
+                    (kockaid.substring(2,3) == "1" && document.getElementById(`${kockaid.substring(0,1)}v${Number(kockaid.substring(2,3))+1}`).style.backgroundColor == "")||
+                    (document.getElementById(`${Number(kockaid.substring(0,1))}v${Number(kockaid.substring(2,3)-1)}`).style.backgroundColor != "" && 
+                    document.getElementById(`${Number(kockaid.substring(0,1))}v${Number(kockaid.substring(2,3))+1}`).style.backgroundColor == ""))
+                    {
+                        document.getElementById(kockaid).style.backgroundColor = `var(--${event.dataTransfer.getData("color")})`
+                        tippedColors[Number(kockaid.substring(2, 3) - 1)] = event.dataTransfer.getData("color");
+                    }
+            }
         }
     }
-    else if (document.getElementById(`${Number(kockaid.substring(0, 1)) - 1}v4`).style.backgroundColor != "") {
-        if (kockaid.substring(2, 3) == "1" || document.getElementById(`${kockaid.substring(0, 1)}v${Number(kockaid.substring(2, 3)) - 1}`).style.backgroundColor != "") {
-            document.getElementById(kockaid).style.backgroundColor = `var(--${event.dataTransfer.getData("color")})`
-            tippedColors[Number(kockaid.substring(2, 3) - 1)] = event.dataTransfer.getData("color");
+    else if (document.getElementById(`${Number(kockaid.substring(0, 1)) - 1}v${szinSzam}`).style.backgroundColor != "") {
+        if (event.dataTransfer.getData("class") == "szin-kocka"){
+            if(document.getElementById(kockaid).style.backgroundColor == "" ||
+                (kockaid.substring(2,3) == "1" && document.getElementById(`${kockaid.substring(0,1)}v${Number(kockaid.substring(2,3))+1}`).style.backgroundColor == "")||
+                (document.getElementById(`${Number(kockaid.substring(0,1))}v${Number(kockaid.substring(2,3)-1)}`).style.backgroundColor != "" && 
+                document.getElementById(`${Number(kockaid.substring(0,1))}v${Number(kockaid.substring(2,3))+1}`).style.backgroundColor == ""))
+                {
+                    document.getElementById(kockaid).style.backgroundColor = `var(--${event.dataTransfer.getData("color")})`
+                    tippedColors[Number(kockaid.substring(2, 3) - 1)] = event.dataTransfer.getData("color");
+                }
         }
     }
 
-    if (kockaid.substring(2, 3) == 4) {
+    if (kockaid.substring(2, 3) == szinSzam) {
         gameCheck(kockaid.substring(0, 1))
     }
 }
@@ -66,7 +110,7 @@ function gameCheck(sor) {
             document.getElementById(`a${i + 1}`).style.backgroundColor = `var(--${guessColors[i]})`;
             document.getElementById(`a${i + 1}`).innerText = ""
         }
-    } else if (sor == 3) {
+    } else if (sor == sorSzam) {
         for (let i = 0; i < 4; i++) {
             console.log(`var(--${guessColors[i]})`);
             document.getElementById(`a${i + 1}`).style.backgroundColor = `var(--${guessColors[i]})`;
@@ -75,17 +119,6 @@ function gameCheck(sor) {
     }
     tippedColors = []
 }
-
-
-function newGame() {
-    let kockak = document.getElementsByClassName("kocka");
-    for (let i = 0; i < kockak.length; i++) {
-        kockak[i].style.backgroundColor = "";
-    }
-    gameStartup();
-
-}
-
 
 
 
@@ -222,7 +255,7 @@ function speechRecognition() {
 function felismertSzin(color){
     document.getElementById(Szinezes).style.backgroundColor = `var(--${color})`
     tippedColors[Number(Szinezes.substring(2, 3) - 1)] = color;
-        if(Szinezes.substring(2,3) == 4){
+        if(Szinezes.substring(2,3) == szinSzam){
             gameCheck(Szinezes.substring(0,1))
             Szinezes = `${Number(Szinezes.substring(0,1))+1}v1`;
         }
@@ -232,9 +265,33 @@ function felismertSzin(color){
 }
 
 function megseSzin(){
-    if(Szinezes != "1v1" && Szinezes.substring(2,3) != 1){
+    if(Szinezes != "1v1" && Szinezes.substring(2,3) != "1"){
             Szinezes = `${Number(Szinezes.substring(0,1))}v${Number(Szinezes.substring(2,3))-1}`
     }
     document.getElementById(Szinezes).style.backgroundColor = "";
 
+}
+
+function pottyTalalt(pId){      //Szín jó
+    const potty = document.getElementById(pId);
+    potty.style.borderColor = "black";
+    potty.style.borderWidth = "8px";
+    potty.style.margin = 0;
+}
+
+function pottyHely(pId){        
+    const potty = document.getElementById(pId);
+    potty.style.borderColor = "white";
+    potty.style.borderWidth = "8px";
+    potty.style.margin = 0;
+}
+function pottyClear(){          //Szín+hely jó
+    const pottyok = document.querySelectorAll(".potty");
+    for (let i = 0; i < pottyok.length; i++) {
+        pottyok[i].style.borderWidth = "2px";
+        pottyok[i].style.borderColor = "black";
+        pottyok[i].style.marginLeft = "5px";
+        pottyok[i].style.marginRight = "5px";
+
+    }
 }
