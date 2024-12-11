@@ -4,7 +4,7 @@ let guessColors = ["", "", "", ""]
 let tippedColors = []
 
 let sorSzam = 3;
-let szinSzam = 5;
+let szinSzam = 4;
 
 let isProtanopiaMode = false;
 
