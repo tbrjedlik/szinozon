@@ -17,8 +17,12 @@ function colorDragStart(event, color) {
     event.dataTransfer.setData("color", color);
     event.dataTransfer.setData("class", event.srcElement.classList[1])
 }
-
+function newGame() {
+    gameStartup();
+}
 function gameStartup() {
+    kockakFeltoltes()
+    pottyClear()
     for (let i = 0; i < szinSzam; i++) {
         guessColors[i] = colors[Math.floor(Math.random() * colors.length)]
         console.log(guessColors[i])
@@ -29,6 +33,28 @@ function gameStartup() {
     Szinezes = '1v1'
 }
 
+function kockakFeltoltes(){
+    const megfejtDiv = document.getElementById("megfejtes");
+    megfejtDiv.innerHTML = "";
+    const valaszDiv = document.getElementById("valasz");
+    valaszDiv.innerHTML = "";
+    for(let i = 0; i < szinSzam; i++) {
+        megfejtDiv.innerHTML += `<div class='kocka' id="a${i+1}"></div>`
+    }
+    for(let i = 0; i < sorSzam; i++){
+        valaszDiv.innerHTML += "<div class='sor'></div>"
+    }    
+    const sorok = document.querySelectorAll("div.sor");
+    for(let i = 0; i < sorSzam; i++){
+        const sor = sorok[i];
+        for(let j = 0; j < szinSzam; j++) {
+            sor.innerHTML += `<div class="kocka" id="${i+1}v${j+1}" ondrop="colorDropped(event)" ondragover="allowDrop(event)"></div>`
+        }
+        for(let j = 0; j < szinSzam; j++) {
+            sor.innerHTML += `<div class="potty" id="p${i+1}${j+1}"></div>`;    //KÉSŐBB VISSZAÁLLÍTANI
+        }
+    }
+}
 
 function colorDropped(event) {
     // console.log(event)
@@ -93,17 +119,6 @@ function gameCheck(sor) {
     }
     tippedColors = []
 }
-
-
-function newGame() {
-    let kockak = document.getElementsByClassName("kocka");
-    for (let i = 0; i < kockak.length; i++) {
-        kockak[i].style.backgroundColor = "";
-    }
-    gameStartup();
-
-}
-
 
 function toggleProtanopiaMode() {
     isProtanopiaMode = !isProtanopiaMode;
@@ -205,4 +220,28 @@ function megseSzin(){
     }
     document.getElementById(Szinezes).style.backgroundColor = "";
 
+}
+
+function pottyTalalt(pId){      //Szín jó
+    const potty = document.getElementById(pId);
+    potty.style.borderColor = "black";
+    potty.style.borderWidth = "8px";
+    potty.style.margin = 0;
+}
+
+function pottyHely(pId){        
+    const potty = document.getElementById(pId);
+    potty.style.borderColor = "white";
+    potty.style.borderWidth = "8px";
+    potty.style.margin = 0;
+}
+function pottyClear(){          //Szín+hely jó
+    const pottyok = document.querySelectorAll(".potty");
+    for (let i = 0; i < pottyok.length; i++) {
+        pottyok[i].style.borderWidth = "2px";
+        pottyok[i].style.borderColor = "black";
+        pottyok[i].style.marginLeft = "5px";
+        pottyok[i].style.marginRight = "5px";
+
+    }
 }
