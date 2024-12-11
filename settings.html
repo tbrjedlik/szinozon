@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Színkitalálós Játék</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="gameStartup()">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Color Cascade</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="cim">
+        <p>Settings</p>
+    </div>
+    
+    <div class="keret">
+        <div class="beallitasok-nyelv szurke-hatter">
+            <label for="nyelvek" class="beallitas">Language</label>
+            <select name="nyelvek" id="nyelvek">
+                <option value="English">English</option>
+                <option value="Hungarian">Hungarian</option>
+            </select>
+        </div>
+
+        <div class="beallitasok-nehezseg szurke-hatter">
+            <p class="beallitas">Difficulty</p>
+            <div class="csuszka">
+                <input type="range" id="csuszka-nehezseg" step="1" min="1" max="4" value="2">
+                <div class="ertekek">
+                    <span>Standard</span>
+                    <span>Medium</span>
+                    <span>Hard</span>
+                    <span>Extreme</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="beallitasok-beszed szurke-hatter">
+            <p class="beallitas">Speech Recognition</p>
+            <div class="csuszka">
+                <input type="range" id="csuszka-beszed" step="1" min="1" max="2" value="1">
+                <div class="ertekek">
+                    <span>Off</span>
+                    <span>On</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
