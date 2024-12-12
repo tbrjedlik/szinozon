@@ -3,8 +3,36 @@ const magyarSzinek = ["kék", "sárga", "piros", "lila", "fehér", "rózsaszín"
 let guessColors = ["", "", "", ""]
 let tippedColors = []
 
-let sorSzam = 11;
-let szinSzam = 4;
+let szinSzam;
+let sorSzam;
+
+
+let difficulty = localStorage.getItem('difficulty') || 'Standard';
+console.log(difficulty)
+
+
+
+if (window.location.pathname.endsWith('settings.html')) {
+    const nehezsegCsuszka = document.getElementById('csuszka-nehezseg');
+    const nehezsegiSzintek = ['Standard', 'Medium', 'Hard', 'Extreme'];
+
+    let difficulty = localStorage.getItem('difficulty') || 'Standard';
+
+    nehezsegCsuszka.value = nehezsegiSzintek.indexOf(difficulty) + 1;
+
+    function updateDifficulty() {
+        difficulty = nehezsegiSzintek[nehezsegCsuszka.value - 1];
+        localStorage.setItem('difficulty', difficulty);
+        console.log(difficulty);
+    }
+
+    nehezsegCsuszka.addEventListener('input', updateDifficulty);
+
+    updateDifficulty();
+}
+
+
+
 
 function allowDrop(event) {
     event.preventDefault();
@@ -16,6 +44,7 @@ function colorDragStart(event, color) {
 }
 
 function gameStartup() {
+    difficultyLevel()
     kockakFeltoltes()
     pottyClear()
     let colorPool = [];
@@ -155,3 +184,31 @@ function pottyClear(){
         pottyok[i].style.marginRight = "5px";
     }
 }
+
+
+
+
+
+
+function difficultyLevel() {
+    switch (difficulty) {
+        case 'Standard':
+            szinSzam = 4;
+            sorSzam = 12;
+            break;
+        case 'Medium':
+            szinSzam = 4;
+            sorSzam = 8;
+            break;
+        case 'Hard':
+            szinSzam = 5;
+            sorSzam = 10;
+            break;
+        case 'Extreme':
+            szinSzam = 5;
+            sorSzam = 1;
+            break;
+    }
+}
+
+
