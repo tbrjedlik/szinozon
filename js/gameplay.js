@@ -5,24 +5,24 @@ let tippedColors = []
 
 let szinSzam;
 let sorSzam;
+let difficulty = 'Standard'
 
-
-let difficulty = localStorage.getItem('difficulty') || 'Standard';
+difficulty = sessionStorage.getItem('difficulty') || 'Standard';
 console.log(difficulty)
 
 
 
-if (window.location.pathname.endsWith('settings.html')) {
+function settings(){
     const nehezsegCsuszka = document.getElementById('csuszka-nehezseg');
     const nehezsegiSzintek = ['Standard', 'Medium', 'Hard', 'Extreme'];
 
-    let difficulty = localStorage.getItem('difficulty') || 'Standard';
+    let difficulty = sessionStorage.getItem('difficulty') || 'Standard';
 
     nehezsegCsuszka.value = nehezsegiSzintek.indexOf(difficulty) + 1;
 
     function updateDifficulty() {
         difficulty = nehezsegiSzintek[nehezsegCsuszka.value - 1];
-        localStorage.setItem('difficulty', difficulty);
+        sessionStorage.setItem('difficulty', difficulty);
         console.log(difficulty);
     }
 
