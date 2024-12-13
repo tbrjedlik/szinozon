@@ -86,45 +86,62 @@ function kockakFeltoltes(){
     }
 }
 
-function colorDropped(event) {
+function colorDropped(event){
     // console.log(event)
     const kockaid = event.toElement.id
-    if (event.dataTransfer.getData("class") == "szin-kocka" && kockaid.substring(0,1) == "1"){       //Első sor ellenőrzés
-        if((kockaid.substring(2,3) == "1" &&  kockaHatter(kockaid,0,+1, false) == "") ||
-        (Number(kockaid.substring(2,3)) == szinSzam && kockaHatter(kockaid, 0, 0, false) == "") ||
-        (kockaHatter(kockaid, 0, -1, false) != "" && kockaHatter(kockaid,0,+1, false) == ""))  {
-            document.getElementById(kockaid).style.backgroundColor = `var(--${event.dataTransfer.getData("color")})`
-            tippedColors[Number(kockaid.substring(2, 3) - 1)] = event.dataTransfer.getData("color");
-            
+    if(Number(kockaid.split('v')[0]) < 10){
+        if (event.dataTransfer.getData("class") == "szin-kocka" && kockaid.substring(0,1) == "1"){       //Első sor ellenőrzés
+            if((kockaid.substring(2,3) == "1" &&  kockaHatter(kockaid,0,+1, false, false) == "") ||
+            (Number(kockaid.substring(2,3)) == szinSzam && kockaHatter(kockaid, 0, 0, false, false) == "") ||
+            (kockaHatter(kockaid, 0, -1, false, false) != "" && kockaHatter(kockaid,0,+1, false, false) == ""))  {
+                document.getElementById(kockaid).style.backgroundColor = `var(--${event.dataTransfer.getData("color")})`
+                tippedColors[Number(kockaid.substring(2, 3) - 1)] = event.dataTransfer.getData("color");
+                
+            }
+        }
+        else if(event.dataTransfer.getData("class") == "szin-kocka" && kockaHatter(kockaid, -1, szinSzam, true, false)){
+            if((kockaid.substring(2,3) == "1" &&  kockaHatter(kockaid,0,+1, false, false) == "") ||
+            (Number(kockaid.substring(2,3)) == szinSzam && kockaHatter(kockaid, 0, 0, false, false) == "") ||
+            (kockaHatter(kockaid, 0, -1, false, false) != "" && kockaHatter(kockaid,0,+1, false, false) == "")){
+                document.getElementById(kockaid).style.backgroundColor = `var(--${event.dataTransfer.getData("color")})`
+                tippedColors[Number(kockaid.substring(2, 3) - 1)] = event.dataTransfer.getData("color");
+            }
+        }
+        if (kockaid.substring(2, 3) == szinSzam) {
+            gameCheck(kockaid.substring(0, 1))
         }
     }
-    else if(event.dataTransfer.getData("class") == "szin-kocka" && kockaHatter(kockaid, -1, szinSzam, true)){
-        if((kockaid.substring(2,3) == "1" &&  kockaHatter(kockaid,0,+1, false) == "") ||
-        (Number(kockaid.substring(2,3)) == szinSzam && kockaHatter(kockaid, 0, 0, false) == "") ||
-        (kockaHatter(kockaid, 0, -1, false) != "" && kockaHatter(kockaid,0,+1, false) == "")){
-            document.getElementById(kockaid).style.backgroundColor = `var(--${event.dataTransfer.getData("color")})`
-            tippedColors[Number(kockaid.substring(2, 3) - 1)] = event.dataTransfer.getData("color");
+    else{       //10nél nagyobb id-s sorok
+        if(event.dataTransfer.getData("class") == "szin-kocka" && kockaHatter(kockaid, -1, szinSzam, true, true)){
+            if((kockaid.substring(3,4) == "1" &&  kockaHatter(kockaid,0,+1, false, true) == "") ||
+            (Number(kockaid.substring(3,4)) == szinSzam && kockaHatter(kockaid, 0, 0, false, true) == "") ||
+            (kockaHatter(kockaid, 0, -1, false, true) != "" && kockaHatter(kockaid,0,+1, false, true) == "")){
+                document.getElementById(kockaid).style.backgroundColor = `var(--${event.dataTransfer.getData("color")})`
+                tippedColors[Number(kockaid.substring(3, 4) - 1)] = event.dataTransfer.getData("color");
+            }
+        }
+        if (kockaid.substring(3, 4) == szinSzam) {
+            gameCheck(kockaid.substring(0, 2))
         }
     }
 
-    if (kockaid.substring(2, 3) == szinSzam) {
-        gameCheck(kockaid.substring(0, 1))
-    }
+    
 }
 
 
 function gameCheck(sor) {
+    console.log("belép")
     let guessed = 0;
     let guessIndex = 1;
-    for (let i = 0; i < 4; i++) {
-        if (tippedColors[i] === guessColors[i]) {
+    for (let i = 0; i < szinSzam; i++) {
+        if (tippedColors[i] == guessColors[i]) {
             guessed++;
             pottyTalalt(`${sor}p${guessIndex}`);
             guessIndex++;
             tippedColors[i] = "";
         }
     }
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < szinSzam; i++) {
         if (guessColors.includes(tippedColors[i])) {
             pottySzin(`${sor}p${guessIndex}`);
             guessIndex++;
@@ -134,13 +151,13 @@ function gameCheck(sor) {
 
     if (guessed == szinSzam) {
         for (let i = 0; i < szinSzam; i++) {
-            console.log(`var(--${guessColors[i]})`);
+            // console.log(`var(--${guessColors[i]})`);
             document.getElementById(`a${i + 1}`).style.backgroundColor = `var(--${guessColors[i]})`;
             document.getElementById(`a${i + 1}`).innerText = ""
         }
     } else if (sor == sorSzam) {
-        for (let i = 0; i < 4; i++) {
-            console.log(`var(--${guessColors[i]})`);
+        for (let i = 0; i < szinSzam; i++) {
+            // console.log(`var(--${guessColors[i]})`);
             document.getElementById(`a${i + 1}`).style.backgroundColor = `var(--${guessColors[i]})`;
             document.getElementById(`a${i + 1}`).innerText = ""
         }
@@ -210,8 +227,9 @@ function difficultyLevel() {
 }
 
 
-function kockaHatter(kockaID, sorvalt, oszlopvalt, oszlopmegad){     //sorvalt: sorváltoztatás +1/-1 stb.    oszlopvalt: oszlopváltoztatás: +1/-1
-                                                                    // Oszlopmegad: true -> oszlopvalt = oszlopszám, false -> szokásos müködés
+function kockaHatter(kockaID, sorvalt, oszlopvalt, oszlopmegad, idtobbszamu){     //sorvalt: sorváltoztatás +1/-1 stb.    oszlopvalt: oszlopváltoztatás: +1/-1
+                                                                                // Oszlopmegad: true -> oszlopvalt = oszlopszám, false -> szokásos müködés
+                                                                                // idtobbszamu: ha az id kettő számjegyű akkor true
     // console.log(kockaID);
     // console.log(sorvalt);
     // console.log(oszlopvalt);
@@ -219,7 +237,7 @@ function kockaHatter(kockaID, sorvalt, oszlopvalt, oszlopmegad){     //sorvalt: 
     // console.log(1 + oszlopvalt);
     
     // console.log();
-    if ((Number(kockaID.substring(0,1)) + sorvalt) >= 1) {
+    if ((Number(kockaID.substring(0,1)) + sorvalt) >= 1 && idtobbszamu == false) {
         if(oszlopmegad == false && (Number(kockaID.substring(2,3)) + oszlopvalt) <= szinSzam && (Number(kockaID.substring(2,3)) + oszlopvalt) > 0){
             // console.log(`${Number(kockaID.substring(0,1)) + sorvalt}v${Number(kockaID.substring(2,3)) + oszlopvalt}`);
             return document.getElementById(`${Number(kockaID.substring(0,1)) + sorvalt}v${Number(kockaID.substring(2,3)) + oszlopvalt}`).style.backgroundColor
@@ -227,6 +245,16 @@ function kockaHatter(kockaID, sorvalt, oszlopvalt, oszlopmegad){     //sorvalt: 
         if(oszlopmegad == true && (Number(kockaID.substring(2,3)) <= szinSzam && Number(kockaID.substring(2,3)) > 0)){
             // console.log(`${Number(kockaID.substring(0,1)) + sorvalt}v${Number(oszlopvalt)}`)
             return document.getElementById(`${Number(kockaID.substring(0,1)) + sorvalt}v${Number(oszlopvalt)}`).style.backgroundColor
+        }
+    }
+    else if((Number(kockaID.substring(0,2)) + sorvalt) >= 1 && idtobbszamu == true){
+        if(oszlopmegad == false && (Number(kockaID.substring(3,4)) + oszlopvalt) <= szinSzam && (Number(kockaID.substring(3,4)) + oszlopvalt) > 0){
+            // console.log(`${Number(kockaID.substring(0,1)) + sorvalt}v${Number(kockaID.substring(2,3)) + oszlopvalt}`);
+            return document.getElementById(`${Number(kockaID.substring(0,2)) + sorvalt}v${Number(kockaID.substring(3,4)) + oszlopvalt}`).style.backgroundColor
+        }
+        if(oszlopmegad == true && (Number(kockaID.substring(3,4)) <= szinSzam && Number(kockaID.substring(3,4)) > 0)){
+            // console.log(`${Number(kockaID.substring(0,1)) + sorvalt}v${Number(oszlopvalt)}`)
+            return document.getElementById(`${Number(kockaID.substring(0,2)) + sorvalt}v${Number(oszlopvalt)}`).style.backgroundColor
         }
     }
 }
