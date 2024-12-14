@@ -54,7 +54,6 @@ function gameStartup() {
     for (let i = 0; i < szinSzam; i++) {
         let index = Math.floor(Math.random() * colorPool.length);
         guessColors[i] = colorPool[index]
-        colorPool.splice(index, 1);
         console.log(guessColors[i])
     }
     for (let i = 0; i < szinSzam; i++) {
