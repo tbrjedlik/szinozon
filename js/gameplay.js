@@ -130,40 +130,51 @@ function colorDropped(event){
 
 
 function gameCheck(sor) {
-    console.log("belép")
+    // console.log("belép");
     let guessed = 0;
     let guessIndex = 1;
+
+    let remainingGuessColors = [...guessColors];
+    let remainingTippedColors = [...tippedColors];
+
     for (let i = 0; i < szinSzam; i++) {
-        if (tippedColors[i] == guessColors[i]) {
+        if (tippedColors[i] === guessColors[i]) {
             guessed++;
             pottyTalalt(`${sor}p${guessIndex}`);
             guessIndex++;
-            tippedColors[i] = "";
-        }
-    }
-    for (let i = 0; i < szinSzam; i++) {
-        if (guessColors.includes(tippedColors[i])) {
-            pottySzin(`${sor}p${guessIndex}`);
-            guessIndex++;
-            tippedColors[i] = "";
+            remainingGuessColors[i] = null;
+            remainingTippedColors[i] = null;
         }
     }
 
-    if (guessed == szinSzam) {
+    for (let i = 0; i < szinSzam; i++) {
+        if (remainingTippedColors[i] !== null) {
+            const colorIndex = remainingGuessColors.indexOf(remainingTippedColors[i]);
+            if (colorIndex !== -1) {
+                pottySzin(`${sor}p${guessIndex}`);
+                guessIndex++;
+                remainingGuessColors[colorIndex] = null;
+                remainingTippedColors[i] = null;
+            }
+        }
+    }
+
+    if (guessed === szinSzam) {
         for (let i = 0; i < szinSzam; i++) {
-            // console.log(`var(--${guessColors[i]})`);
             document.getElementById(`a${i + 1}`).style.backgroundColor = `var(--${guessColors[i]})`;
-            document.getElementById(`a${i + 1}`).innerText = ""
+            document.getElementById(`a${i + 1}`).innerText = "";
         }
     } else if (sor == sorSzam) {
         for (let i = 0; i < szinSzam; i++) {
-            // console.log(`var(--${guessColors[i]})`);
             document.getElementById(`a${i + 1}`).style.backgroundColor = `var(--${guessColors[i]})`;
-            document.getElementById(`a${i + 1}`).innerText = ""
+            document.getElementById(`a${i + 1}`).innerText = "";
         }
     }
-    tippedColors = []
+
+    tippedColors = [];
 }
+
+
 
 
 function newGame() {
