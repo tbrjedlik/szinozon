@@ -44,22 +44,26 @@ function colorDragStart(event, color) {
 }
 
 function gameStartup() {
-    difficultyLevel()
-    kockakFeltoltes()
-    pottyClear()
+    difficultyLevel();
+    kockakFeltoltes();
+    pottyClear();
     let colorPool = [];
     colors.forEach(szin => {
         colorPool.push(szin);
     });
     for (let i = 0; i < szinSzam; i++) {
         let index = Math.floor(Math.random() * colorPool.length);
-        guessColors[i] = colorPool[index]
-        console.log(guessColors[i])
+        guessColors[i] = colorPool[index];
+        console.log(guessColors[i]);
     }
     for (let i = 0; i < szinSzam; i++) {
-        document.getElementById(`a${i + 1}`).innerText = "?"
+        document.getElementById(`a${i + 1}`).innerText = "?";
     }
-    Szinezes = '1v1'
+    const sorok = document.querySelectorAll('.sor');
+    if (sorok.length > 0) {
+        sorok[0].classList.add('aktualis-sor');
+    }
+    Szinezes = '1v1';
 }
 
 function kockakFeltoltes(){
@@ -129,7 +133,12 @@ function colorDropped(event){
 
 
 function gameCheck(sor) {
-    // console.log("belép");
+    const sorok = document.querySelectorAll('.sor');
+    sorok.forEach(sorElem => sorElem.classList.remove('aktualis-sor'));
+    if (Number(sor) < sorSzam) {
+        document.querySelector(`.sor:nth-child(${Number(sor) + 1})`).classList.add('aktualis-sor');
+    }
+
     let guessed = 0;
     let guessIndex = 1;
 

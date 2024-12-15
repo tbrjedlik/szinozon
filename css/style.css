@@ -94,6 +94,14 @@ nav a {
     position: relative;
 }
 
+.aktualis-sor {
+    outline: 2px solid rgb(128, 128, 128);
+    outline-offset: 5px;
+    position: relative;
+    box-shadow: 0 0 0 5px transparent;
+    border-radius: 2px;
+}
+
 .potty {
     width: 6px;
     height: 6px;
