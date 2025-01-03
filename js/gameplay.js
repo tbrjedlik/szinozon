@@ -6,9 +6,11 @@ let tippedColors = []
 let szinSzam;
 let sorSzam;
 let difficulty = 'Standard'
+let speechSet = 0
 
 difficulty = sessionStorage.getItem('difficulty') || 'Standard';
 console.log(difficulty)
+speechSet = sessionStorage.getItem('speechSet') || 0;
 
 
 
@@ -29,6 +31,21 @@ function settings(){
     nehezsegCsuszka.addEventListener('input', updateDifficulty);
 
     updateDifficulty();
+
+    const speechCsuszka = document.getElementById('csuszka-beszed');
+
+    let speechSet = sessionStorage.getItem('speechSet') || 'Off';
+
+    speechCsuszka.value = speechSet + 1;
+    
+    function updateSpeech() {
+        speechErtek = speechCsuszka.value - 1;
+        sessionStorage.setItem('speechSet', speechErtek);
+    }
+
+    speechCsuszka.addEventListener('input', updateSpeech);
+
+    updateSpeech();
 }
 
 
@@ -47,6 +64,7 @@ function gameStartup() {
     difficultyLevel();
     kockakFeltoltes();
     pottyClear();
+    speechSetting();
     let colorPool = [];
     colors.forEach(szin => {
         colorPool.push(szin);

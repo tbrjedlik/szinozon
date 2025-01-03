@@ -1,7 +1,7 @@
-let isSpeechRecognition = false;
-let Szinezes = '1v1'
+let SpeechRecognition = webkitSpeechRecognition;
+// let Szinezes;
 let resultI = 0;
-const recognition = new(window.SpeechRecognition || window.webkitSpeechRecognition)();
+const recognition = new SpeechRecognition();
 
 recognition.lang = 'hu-HU';
 recognition.continuous = true;
@@ -33,16 +33,34 @@ recognition.onresult = (event) =>{
 
 recognition.onerror = function(event) {
     console.error("Hiba történt a beszédfelismerés során:", event.error);
+    alert("A beszédfelismerés nem használható. Lehetséges ok: engedély hiánya.")
 };
 
-function speechRecognition() {
-    isSpeechRecognition = !isSpeechRecognition;
-    if (isSpeechRecognition) {
-        recognition.start();
-    } else {
-        recognition.stop();
-        console.log("A beszédfelismerés leállt...")
+function speechSetting(){
+    console.log(speechSet)
+    switch (speechSet){
+        case '0':
+            try{
+                recognition.stop();
+            }
+            catch(error){
+                break;
+            }
+            break;
+        case '1':
+            try{
+                recognition.start();
+            }
+            catch(error){
+                alert("A beszédfelismerés nem használható. Lehetséges ok: böngésző nem támogatott.")
+                break;
+            }
+            break;
     }
+}
+
+function asdd(){
+    console.log(Szinezes)
 }
 
 function felismertSzin(color){
