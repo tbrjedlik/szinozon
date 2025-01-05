@@ -46,7 +46,29 @@ function settings(){
     speechCsuszka.addEventListener('input', updateSpeech);
 
     updateSpeech();
+
+    const nyelvValaszto = document.getElementById('nyelvek');
+    let lang = sessionStorage.getItem('lang') || 'en'; // Alapértelmezett nyelv
+
+    // Állítsuk be a legördülő menü kezdeti értékét
+    nyelvValaszto.value = lang;
+
+    function updateLanguage() {
+        lang = nyelvValaszto.value;
+        sessionStorage.setItem('lang', lang);
+        console.log(`nyelv: ${lang}`);
+    
+        
+        
+    }
+
+    nyelvValaszto.addEventListener('change', updateLanguage);
+
+    updateLanguage();
+
+    
 }
+
 
 
 
@@ -276,7 +298,7 @@ function kockaHatter(kockaID, sorvalt, oszlopvalt, oszlopmegad, idtobbszamu){   
     // console.log();
     if ((Number(kockaID.substring(0,1)) + sorvalt) >= 1 && idtobbszamu == false) {
         if(oszlopmegad == false && (Number(kockaID.substring(2,3)) + oszlopvalt) <= szinSzam && (Number(kockaID.substring(2,3)) + oszlopvalt) > 0){
-            // console.log(`${Number(kockaID.substring(0,1)) + sorvalt}v${Number(kockaID.substring(2,3)) + oszlopvalt}`);
+            console.log(`${Number(kockaID.substring(0,1)) + sorvalt}v${Number(kockaID.substring(2,3)) + oszlopvalt}`);
             return document.getElementById(`${Number(kockaID.substring(0,1)) + sorvalt}v${Number(kockaID.substring(2,3)) + oszlopvalt}`).style.backgroundColor
         }
         if(oszlopmegad == true && (Number(kockaID.substring(2,3)) <= szinSzam && Number(kockaID.substring(2,3)) > 0)){
