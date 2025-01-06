@@ -33,7 +33,7 @@
             <p class="beallitas">Difficulty</p>
             <div class="csuszka">
                 <input type="range" id="csuszka-nehezseg" step="1" min="1" max="4" value="2">
-                <div class="ertekek">
+                <div class="ertekek ertekek-nehezseg">
                     <span>Standard</span>
                     <span id="medium-diff">Medium</span>
                     <span>Hard</span>
@@ -46,9 +46,41 @@
             <p class="beallitas">Speech Recognition</p>
             <div class="csuszka">
                 <input type="range" id="csuszka-beszed" step="1" min="1" max="2" value="1">
-                <div class="ertekek">
+                <div class="ertekek ertekek-beszed">
+                    <span></span>
+                    <span></span>
                     <span>Off</span>
                     <span>On</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="beallitasok-szintevesztes szurke-hatter">
+            <div class="colormode">
+                <p class="beallitas">Colorblind mode</p>
+                <div class="csuszka">
+                    <input type="range" id="csuszka-szintevesztes" step="1" min="1" max="2" value="1">
+                    <div class="ertekek ertekek-szintevesztes">
+                        <span></span>
+                        <span></span>
+                        <span>Off</span>
+                        <span>On</span>
+                    </div>
+                </div>
+            </div>
+            <div class="appear">
+                <div class="szoveg">
+                    <p>The colors will appear like this</p>
+                </div>
+                <div class="colors">
+                    <div class="szinkor" id="piros"></div>
+                    <div class="szinkor" id="sarga"></div>
+                    <div class="szinkor" id="kek"></div>
+                    <div class="szinkor" id="zold"></div>
+                    <div class="szinkor" id="lila"></div>
+                    <div class="szinkor" id="feher"></div>
+                    <div class="szinkor" id="narancs"></div>
+                    <div class="szinkor" id="rozsaszin"></div>
                 </div>
             </div>
         </div>
