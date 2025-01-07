@@ -61,7 +61,6 @@ nav img {
     padding: 10px;
     padding-bottom: 0px;
     height: fit-content;
-
     position: absolute;
     top: 60px;
     left: 700px;
@@ -70,7 +69,7 @@ nav img {
 .terulet, #valasz {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    margin-top: 50px;
 }
 
 #megfejtes {
