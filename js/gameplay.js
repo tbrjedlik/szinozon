@@ -310,7 +310,7 @@ function difficultyLevel() {
             break;
         case 'Extreme':
             szinSzam = 5;
-            sorSzam = 12;
+            sorSzam = 10;
 
             if (jatekVege == false && !intervalId) {
                 setInterval(szinKorforgas, 30000);
