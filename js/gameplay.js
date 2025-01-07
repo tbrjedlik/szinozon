@@ -8,6 +8,18 @@ let sorSzam;
 let difficulty = 'Standard'
 let speechSet = 0
 
+let elertPont = 0
+let legjobbPontszam = 0;
+
+if (sessionStorage.getItem("bestScore")) {
+    legjobbPontszam = parseInt(sessionStorage.getItem("bestScore"));
+    document.getElementById("personal-best").textContent = legjobbPontszam;
+}
+
+let kezdesIdeje;
+let befejezesIdeje;
+let elteltMp;
+
 let jatekVege = false;
 let intervalId;
 
@@ -116,6 +128,10 @@ function colorDragStart(event, color) {
 }
 
 function gameStartup() {
+
+    kezdesIdeje = new Date;
+    console.log('Kezdés ideje:')
+    console.log(kezdesIdeje)
 
     console.log('cvd mode:' + colorblindMode)
     console.log(sessionStorage.getItem('iscbOn'))
@@ -250,14 +266,14 @@ function gameCheck(sor) {
             document.getElementById(`a${i + 1}`).style.backgroundColor = `var(--${guessColors[i]})`;
             document.getElementById(`a${i + 1}`).innerText = "";
 
-            jatekVegetErt();
+            jatekVegetErt((sorSzam-sor));
         }
     } else if (sor == sorSzam) {
         for (let i = 0; i < szinSzam; i++) {
             document.getElementById(`a${i + 1}`).style.backgroundColor = `var(--${guessColors[i]})`;
             document.getElementById(`a${i + 1}`).innerText = "";
         
-            jatekVegetErt();
+            jatekVegetErt(0);
         }
     }
 
@@ -276,10 +292,28 @@ function newGame() {
 
 }
 
-function jatekVegetErt(){
+function jatekVegetErt(megmaradtProbalkozas){
     jatekVege = true;
     clearInterval(intervalId);
+    befejezesIdeje = new Date;
     console.log("A játék véget ért.");
+    console.log(befejezesIdeje)
+
+    if (megmaradtProbalkozas == 0){
+        elertPont = 'You lost.'
+    }
+    else{
+        elertPont = pontszamitas(megmaradtProbalkozas)
+
+        if (elertPont > legjobbPontszam){
+            legjobbPontszam = elertPont;
+        }
+    }
+
+    sessionStorage.setItem("bestScore", legjobbPontszam);
+
+    document.getElementById("score").textContent = elertPont;
+    document.getElementById("personal-best").textContent = legjobbPontszam;
 }
 
 function pottyTalalt(pId){      //Szín+hely jó
@@ -372,6 +406,33 @@ function szinKorforgas() {
     });
 
     console.log("Színek frissítve...");
+}
+
+function pontszamitas(megmaradtProbalkozas){
+
+    switch (difficulty) {
+        case 'Standard':
+            alapPont = 120;
+            break;
+        case 'Medium':
+            alapPont = 300;
+            break;
+            break;
+        case 'Hard':
+            alapPont = 600;
+            break;
+            break;
+        case 'Extreme':
+            alapPont = 1200;
+            break;
+    }
+
+    elteltMp = (befejezesIdeje-kezdesIdeje)/1000
+    console.log(elteltMp)
+
+    elertPont = alapPont + megmaradtProbalkozas - Math.floor((elteltMp-5)/5);
+
+    return elertPont;
 }
 
 function setColorBlindness(){
