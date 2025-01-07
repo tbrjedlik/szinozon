@@ -1,9 +1,22 @@
 let colorblindMode = false;
-// console.log('cvd mode:'+colorblindMode)
+
+document.querySelectorAll('.exclusive-checkbox').forEach((checkbox) => {
+    checkbox.addEventListener('change', (event) => {
+        if (event.target.checked) {
+
+            document.querySelectorAll('.exclusive-checkbox').forEach((otherCheckbox) => {
+                if (otherCheckbox !== event.target) {
+                    otherCheckbox.checked = false;
+                }
+            });
+        }
+    });
+});
+
 function toggleColorblindMode(){
     colorblindMode = !colorblindMode;
 
-    // console.log('cvd mode:' + colorblindMode)
+    console.log('cvd mode:' + colorblindMode)
 
     if (!colorblindMode){
         document.documentElement.style.setProperty("--blue", "blue")
@@ -14,10 +27,16 @@ function toggleColorblindMode(){
         document.documentElement.style.setProperty("--pink", "pink")
         document.documentElement.style.setProperty("--orange", "orange")
         document.documentElement.style.setProperty("--green", "green")
+
+        document.querySelector('.color-pies').style.display = 'none';
+
     }
-    // else{
-    //     console.log('Most kell választani.')
-    // }
+    else{
+
+        document.querySelector('.color-pies').style.display = 'flex';
+
+        console.log('Most kell választani.')
+    }
 }
 
 function toggleColorblindType(type) {

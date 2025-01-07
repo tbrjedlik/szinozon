@@ -37,7 +37,7 @@ function settings(){
     let speechSet = sessionStorage.getItem('speechSet') || 'Off';
 
     speechCsuszka.value = speechSet + 1;
-    
+
     function updateSpeech() {
         speechErtek = speechCsuszka.value - 1;
         sessionStorage.setItem('speechSet', speechErtek);
@@ -48,9 +48,8 @@ function settings(){
     updateSpeech();
 
     const nyelvValaszto = document.getElementById('nyelvek');
-    let lang = sessionStorage.getItem('lang') || 'en'; // Alapértelmezett nyelv
+    let lang = sessionStorage.getItem('lang') || 'en';
 
-    // Állítsuk be a legördülő menü kezdeti értékét
     nyelvValaszto.value = lang;
 
     function updateLanguage() {
@@ -66,6 +65,21 @@ function settings(){
 
     updateLanguage();
 
+    const colorblindCsuszka = document.getElementById('csuszka-szintevesztes');
+
+    colorblindCsuszka.addEventListener('input', () => {
+        const value = parseInt(colorblindCsuszka.value);
+    
+        if (value === 1) {
+            if (colorblindMode) {
+                toggleColorblindMode();
+            }
+        } else if (value === 2) {
+            if (!colorblindMode) {
+                toggleColorblindMode();
+            }
+        }
+    });
     
 }
 
@@ -83,6 +97,9 @@ function colorDragStart(event, color) {
 }
 
 function gameStartup() {
+
+    console.log('cvd mode:' + colorblindMode)
+
     difficultyLevel();
     kockakFeltoltes();
     pottyClear();
