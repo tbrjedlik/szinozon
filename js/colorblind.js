@@ -1,69 +1,169 @@
 let colorblindMode = false;
-// console.log('cvd mode:'+colorblindMode)
-function toggleColorblindMode(){
+
+let lastChecked = null;
+
+document.querySelectorAll('.exclusive-checkbox').forEach((checkbox) => {
+    checkbox.addEventListener('change', (event) => {
+        if (event.target.checked) {
+            if (lastChecked && lastChecked !== event.target) {
+                lastChecked.checked = false;
+            }
+            lastChecked = event.target;
+        } else {
+            if (lastChecked === event.target) {
+                event.target.checked = true;
+            }
+        }
+
+        if (event.target.checked) {
+            if (event.target.previousElementSibling.textContent.includes("Red blindness")) {
+                toggleColorblindType('protanopia');
+            } else if (event.target.previousElementSibling.textContent.includes("Green blindness")) {
+                toggleColorblindType('deutranopia');
+            } else if (event.target.previousElementSibling.textContent.includes("Blue blindness")) {
+                toggleColorblindType('tritanopia');
+            } else if (event.target.previousElementSibling.textContent.includes("Total color blindness")) {
+                toggleColorblindType('achromatopsia');
+            }
+        }
+    });
+});
+
+
+
+function toggleColorblindMode() {
     colorblindMode = !colorblindMode;
 
-    // console.log('cvd mode:' + colorblindMode)
+    console.log('cvd mode:' + colorblindMode);
 
-    if (!colorblindMode){
-        document.documentElement.style.setProperty("--blue", "blue")
-        document.documentElement.style.setProperty("--yellow", "yellow")
-        document.documentElement.style.setProperty("--red", "red")
-        document.documentElement.style.setProperty("--purple", "purple")
-        document.documentElement.style.setProperty("--white", "white")
-        document.documentElement.style.setProperty("--pink", "pink")
-        document.documentElement.style.setProperty("--orange", "orange")
-        document.documentElement.style.setProperty("--green", "green")
+    if (!colorblindMode) {
+        resetToDefaultColors();
+        document.querySelector('.color-pies').style.display = 'none';
+
+        document.querySelectorAll('.exclusive-checkbox').forEach((checkbox) => {
+            checkbox.checked = false;
+        });
+
+    } else {
+        document.querySelector('.color-pies').style.display = 'flex';
     }
-    // else{
-    //     console.log('Most kell választani.')
-    // }
 }
 
 function toggleColorblindType(type) {
 
-    if (colorblindMode) {
-        switch (type){
-            case 'protanopia':
-                document.documentElement.style.setProperty("--blue", "blue")
-                document.documentElement.style.setProperty("--yellow", "yellow")
-                document.documentElement.style.setProperty("--red", "rgb(255, 100, 50)")
-                document.documentElement.style.setProperty("--purple", "rgb(140, 50, 230)")
-                document.documentElement.style.setProperty("--white", "white")
-                document.documentElement.style.setProperty("--pink", "rgb(255, 150, 230)")
-                document.documentElement.style.setProperty("--orange", "rgb(255, 170, 80)")
-                document.documentElement.style.setProperty("--green", "rgb(0, 200, 150)")
-                break;
-            
-            case 'deutranopia':
-                document.documentElement.style.setProperty("--blue", "rgb(0, 0, 255)")
-                document.documentElement.style.setProperty("--yellow", "rgb(255, 255, 0)")
-                document.documentElement.style.setProperty("--red", "rgb(200, 50, 50)")
-                document.documentElement.style.setProperty("--purple", "rgb(150, 0, 200)")
-                document.documentElement.style.setProperty("--white", "rgb(255, 255, 255)")
-                document.documentElement.style.setProperty("--pink", "rgb(255, 150, 200)")
-                document.documentElement.style.setProperty("--orange", "rgb(255, 140, 0)")
-                document.documentElement.style.setProperty("--green", "rgb(0, 170, 170)")
-                break;
-        
-            case 'tritanopia':
-                document.documentElement.style.setProperty("--blue", "rgb(140, 0, 255)")
-                document.documentElement.style.setProperty("--yellow", "rgb(150, 200, 0)")
-                document.documentElement.style.setProperty("--red", "rgb(255, 0, 0)")
-                document.documentElement.style.setProperty("--purple", "rgb(200, 50, 200)")
-                document.documentElement.style.setProperty("--white", "rgb(255, 255, 255)")
-                document.documentElement.style.setProperty("--pink", "rgb(255, 120, 180)")
-                document.documentElement.style.setProperty("--orange", "rgb(255, 100, 50)")
-                document.documentElement.style.setProperty("--green", "rgb(0, 150, 100)")
-                break;
+    if (colorblindMode && document.documentElement.style.getPropertyValue("--blue") === "black") {
+        resetToDefaultColors();  
+    }
 
+    if (colorblindMode) {
+        switch (type) {
+            case 'protanopia':
+                setColorblindColors("rgb(255, 100, 50)", "rgb(140, 50, 230)", "rgb(255, 150, 230)", "rgb(255, 170, 80)", "rgb(0, 200, 150)", "blue", "yellow", "red");
+                break;
+            case 'deutranopia':
+                setColorblindColors("rgb(200, 50, 50)", "rgb(150, 0, 200)", "rgb(255, 150, 200)", "rgb(255, 140, 0)", "rgb(0, 170, 170)", "rgb(0, 0, 255)", "rgb(255, 255, 0)", "red");
+                break;
+            case 'tritanopia':
+                setColorblindColors("rgb(255, 0, 0)", "rgb(200, 50, 200)", "rgb(255, 120, 180)", "rgb(255, 100, 50)", "rgb(0, 150, 100)", "rgb(140, 0, 255)", "rgb(150, 200, 0)", "rgb(255, 255, 255)");
+                break;
             case 'achromatopsia':
-                //TODO: acro
+                setAchromatopsiaColors();
+                break;
+            default:
+                resetToDefaultColors(); 
                 break;
         }
-            
     }
-    else {
-        console.error('Hiba: Érvénytelen konfiguráció. A "colorblindMode" ki van kapcsolva.')
-    }
+}
+
+function setColorblindColors(red, purple, pink, orange, green, blue, yellow, white) {
+    document.documentElement.style.setProperty("--blue", blue);
+    document.documentElement.style.setProperty("--yellow", yellow);
+    document.documentElement.style.setProperty("--red", red);
+    document.documentElement.style.setProperty("--purple", purple);
+    document.documentElement.style.setProperty("--white", white);
+    document.documentElement.style.setProperty("--pink", pink);
+    document.documentElement.style.setProperty("--orange", orange);
+    document.documentElement.style.setProperty("--green", green);
+}
+
+function setAchromatopsiaColors() {
+    document.documentElement.style.setProperty("--blue", "black");
+    document.documentElement.style.setProperty("--yellow", "black");
+    document.documentElement.style.setProperty("--red", "black");
+    document.documentElement.style.setProperty("--purple", "black");
+    document.documentElement.style.setProperty("--white", "black");
+    document.documentElement.style.setProperty("--pink", "black");
+    document.documentElement.style.setProperty("--orange", "black");
+    document.documentElement.style.setProperty("--green", "black");
+
+    document.querySelectorAll('.szinkor').forEach((element) => {
+        element.style.backgroundColor = "black";
+        element.style.color = "white";
+        element.style.textAlign = "center";
+        element.style.fontSize = "20px";
+
+        switch (element.id) {
+            case 'piros': element.innerHTML = "R"; break;
+            case 'sarga': element.innerHTML = "Y"; break;
+            case 'kek': element.innerHTML = "B"; break;
+            case 'zold': element.innerHTML = "G"; break;
+            case 'lila': element.innerHTML = "P"; break;
+            case 'feher': element.innerHTML = "W"; break;
+            case 'narancs': element.innerHTML = "O"; break;
+            case 'rozsaszin': element.innerHTML = "P"; break;
+        }
+    });
+
+    document.querySelectorAll('.szin-kocka').forEach((element) => {
+        element.style.backgroundColor = "black";
+        element.style.color = "white";
+        element.style.textAlign = "center";
+        element.style.fontSize = "20px";
+
+        switch (element.id) {
+            case 'piros': element.innerHTML = "R"; break;
+            case 'sarga': element.innerHTML = "Y"; break;
+            case 'kek': element.innerHTML = "B"; break;
+            case 'zold': element.innerHTML = "G"; break;
+            case 'lila': element.innerHTML = "P"; break;
+            case 'feher': element.innerHTML = "W"; break;
+            case 'narancs': element.innerHTML = "O"; break;
+            case 'rozsaszin': element.innerHTML = "P"; break;
+        }
+    });
+}
+
+function resetToDefaultColors() {
+    const defaultColors = {
+        blue: "blue",
+        yellow: "yellow",
+        red: "red",
+        purple: "purple",
+        white: "white",
+        pink: "pink",
+        orange: "orange",
+        green: "green"
+    };
+
+    document.documentElement.style.setProperty("--blue", defaultColors.blue);
+    document.documentElement.style.setProperty("--yellow", defaultColors.yellow);
+    document.documentElement.style.setProperty("--red", defaultColors.red);
+    document.documentElement.style.setProperty("--purple", defaultColors.purple);
+    document.documentElement.style.setProperty("--white", defaultColors.white);
+    document.documentElement.style.setProperty("--pink", defaultColors.pink);
+    document.documentElement.style.setProperty("--orange", defaultColors.orange);
+    document.documentElement.style.setProperty("--green", defaultColors.green);
+
+    document.querySelectorAll('.szinkor').forEach((element) => {
+        element.style.backgroundColor = "";
+        element.style.color = "";
+        element.innerHTML = ""; 
+    });
+
+    document.querySelectorAll('.szin-kocka').forEach((element) => {
+        element.style.backgroundColor = "";
+        element.style.color = "";
+        element.innerHTML = ""; 
+    });
 }

@@ -8,6 +8,9 @@ let sorSzam;
 let difficulty = 'Standard'
 let speechSet = 0
 
+let jatekVege = false;
+let intervalId;
+
 difficulty = sessionStorage.getItem('difficulty') || 'Standard';
 console.log(difficulty)
 speechSet = sessionStorage.getItem('speechSet') || 0;
@@ -37,7 +40,7 @@ function settings(){
     let speechSet = sessionStorage.getItem('speechSet') || 'Off';
 
     speechCsuszka.value = speechSet + 1;
-    
+
     function updateSpeech() {
         speechErtek = speechCsuszka.value - 1;
         sessionStorage.setItem('speechSet', speechErtek);
@@ -48,9 +51,8 @@ function settings(){
     updateSpeech();
 
     const nyelvValaszto = document.getElementById('nyelvek');
-    let lang = sessionStorage.getItem('lang') || 'en'; // Alapértelmezett nyelv
+    let lang = sessionStorage.getItem('lang') || 'en';
 
-    // Állítsuk be a legördülő menü kezdeti értékét
     nyelvValaszto.value = lang;
 
     function updateLanguage() {
@@ -66,8 +68,25 @@ function settings(){
 
     updateLanguage();
 
+    const colorblindCsuszka = document.getElementById('csuszka-szintevesztes');
+
+    colorblindCsuszka.addEventListener('input', () => {
+        const value = parseInt(colorblindCsuszka.value);
+    
+        if (value === 1) {
+            if (colorblindMode) {
+                toggleColorblindMode();
+            }
+        } else if (value === 2) {
+            if (!colorblindMode) {
+                toggleColorblindMode();
+            }
+        }
+    });
     
 }
+
+
 
 
 
@@ -83,6 +102,9 @@ function colorDragStart(event, color) {
 }
 
 function gameStartup() {
+
+    console.log('cvd mode:' + colorblindMode)
+
     difficultyLevel();
     kockakFeltoltes();
     pottyClear();
@@ -211,11 +233,15 @@ function gameCheck(sor) {
         for (let i = 0; i < szinSzam; i++) {
             document.getElementById(`a${i + 1}`).style.backgroundColor = `var(--${guessColors[i]})`;
             document.getElementById(`a${i + 1}`).innerText = "";
+
+            jatekVegetErt();
         }
     } else if (sor == sorSzam) {
         for (let i = 0; i < szinSzam; i++) {
             document.getElementById(`a${i + 1}`).style.backgroundColor = `var(--${guessColors[i]})`;
             document.getElementById(`a${i + 1}`).innerText = "";
+        
+            jatekVegetErt();
         }
     }
 
@@ -234,7 +260,11 @@ function newGame() {
 
 }
 
-
+function jatekVegetErt(){
+    jatekVege = true;
+    clearInterval(intervalId);
+    console.log("A játék véget ért.");
+}
 
 function pottyTalalt(pId){      //Szín+hely jó
     const potty = document.getElementById(pId);
@@ -280,10 +310,55 @@ function difficultyLevel() {
             break;
         case 'Extreme':
             szinSzam = 5;
-            sorSzam = 1;
+            sorSzam = 10;
+
+            if (jatekVege == false && !intervalId) {
+                setInterval(szinKorforgas, 30000);
+            }
+    
             break;
+    }};
+
+function extremeSzinGeneralas() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
     }
+    return color;
 }
+
+function szinKorforgas() {
+
+    const colors = [
+        "--blue",
+        "--yellow",
+        "--red",
+        "--purple",
+        "--white",
+        "--pink",
+        "--orange",
+        "--green"
+    ];
+
+    let usedColors = [];
+
+    colors.forEach(color => {
+        let newColor;
+
+        do {
+            newColor = extremeSzinGeneralas();
+        } while (usedColors.includes(newColor));
+
+        usedColors.push(newColor);
+
+        document.documentElement.style.setProperty(color, newColor);
+    });
+
+    console.log("Színek frissítve...");
+}
+
+
 
 
 function kockaHatter(kockaID, sorvalt, oszlopvalt, oszlopmegad, idtobbszamu){     //sorvalt: sorváltoztatás +1/-1 stb.    oszlopvalt: oszlopváltoztatás: +1/-1
