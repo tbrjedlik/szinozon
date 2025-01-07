@@ -1,6 +1,8 @@
 let colorblindMode = false;
 
 let lastChecked = null;
+let colorblindType = sessionStorage.getItem('colorblindType') || '';
+
 
 document.querySelectorAll('.exclusive-checkbox').forEach((checkbox) => {
     checkbox.addEventListener('change', (event) => {
@@ -18,12 +20,16 @@ document.querySelectorAll('.exclusive-checkbox').forEach((checkbox) => {
         if (event.target.checked) {
             if (event.target.previousElementSibling.textContent.includes("Red blindness")) {
                 toggleColorblindType('protanopia');
+                sessionStorage.setItem('colorblindType', 'protanopia')
             } else if (event.target.previousElementSibling.textContent.includes("Green blindness")) {
                 toggleColorblindType('deutranopia');
+                sessionStorage.setItem('colorblindType', 'deutranopia')
             } else if (event.target.previousElementSibling.textContent.includes("Blue blindness")) {
                 toggleColorblindType('tritanopia');
+                sessionStorage.setItem('colorblindType', 'tritanopia')
             } else if (event.target.previousElementSibling.textContent.includes("Total color blindness")) {
                 toggleColorblindType('achromatopsia');
+                sessionStorage.setItem('colorblindType', 'achromatopsia')
             }
         }
     });
@@ -50,7 +56,6 @@ function toggleColorblindMode() {
 }
 
 function toggleColorblindType(type) {
-
     if (colorblindMode && document.documentElement.style.getPropertyValue("--blue") === "black") {
         resetToDefaultColors();  
     }

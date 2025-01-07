@@ -14,6 +14,7 @@ let intervalId;
 difficulty = sessionStorage.getItem('difficulty') || 'Standard';
 console.log(difficulty)
 speechSet = sessionStorage.getItem('speechSet') || 0;
+iscolorblindOn = sessionStorage.getItem('iscbOn') || false;
 
 
 
@@ -57,11 +58,13 @@ function settings(){
 
     function updateLanguage() {
         lang = nyelvValaszto.value;
-        sessionStorage.setItem('lang', lang);
+        if(lang == 'hu'){
+            sessionStorage.setItem('lang', 'hu-HU');
+        }
+        else{
+            sessionStorage.setItem('lang', 'en-US');
+        }            
         console.log(`nyelv: ${lang}`);
-    
-        
-        
     }
 
     nyelvValaszto.addEventListener('change', updateLanguage);
@@ -70,17 +73,28 @@ function settings(){
 
     const colorblindCsuszka = document.getElementById('csuszka-szintevesztes');
 
+    let colorbvalue = sessionStorage.getItem('iscbOn')
+    if(colorbvalue == 'true'){colorblindCsuszka.value = 2
+        document.querySelector('.color-pies').style.display = 'flex';
+    }
+    else(colorblindCsuszka.value = 1)
+    setColorBlindness()
     colorblindCsuszka.addEventListener('input', () => {
-        const value = parseInt(colorblindCsuszka.value);
+        const colorblindSet = parseInt(colorblindCsuszka.value);
     
-        if (value === 1) {
+        if (colorblindSet === 1) {
+            document.querySelector('.color-pies').style.display = 'none';
             if (colorblindMode) {
+                console.log(colorblindMode)
                 toggleColorblindMode();
             }
-        } else if (value === 2) {
+            sessionStorage.setItem('iscbOn', false);
+        } else if (colorblindSet === 2) {
             if (!colorblindMode) {
+                console.log(colorblindMode)
                 toggleColorblindMode();
             }
+            sessionStorage.setItem('iscbOn', true);
         }
     });
     
@@ -104,10 +118,12 @@ function colorDragStart(event, color) {
 function gameStartup() {
 
     console.log('cvd mode:' + colorblindMode)
+    console.log(sessionStorage.getItem('iscbOn'))
 
     difficultyLevel();
     kockakFeltoltes();
     pottyClear();
+    setColorBlindness();
     speechSetting();
     let colorPool = [];
     colors.forEach(szin => {
@@ -358,7 +374,29 @@ function szinKorforgas() {
     console.log("Színek frissítve...");
 }
 
-
+function setColorBlindness(){
+    console.log("asd")
+    if(sessionStorage.getItem('iscbOn') == 'true'){
+        switch (sessionStorage.getItem('colorblindType')) {
+            case 'protanopia':
+                console.log("ASdasdasdasdas")
+                setColorblindColors("rgb(255, 100, 50)", "rgb(140, 50, 230)", "rgb(255, 150, 230)", "rgb(255, 170, 80)", "rgb(0, 200, 150)", "blue", "yellow", "red");
+                break;
+            case 'deutranopia':
+                setColorblindColors("rgb(200, 50, 50)", "rgb(150, 0, 200)", "rgb(255, 150, 200)", "rgb(255, 140, 0)", "rgb(0, 170, 170)", "rgb(0, 0, 255)", "rgb(255, 255, 0)", "red");
+                break;
+            case 'tritanopia':
+                setColorblindColors("rgb(255, 0, 0)", "rgb(200, 50, 200)", "rgb(255, 120, 180)", "rgb(255, 100, 50)", "rgb(0, 150, 100)", "rgb(140, 0, 255)", "rgb(150, 200, 0)", "rgb(255, 255, 255)");
+                break;
+            case 'achromatopsia':
+                setAchromatopsiaColors();
+                break;
+            default:
+                resetToDefaultColors(); 
+                break;
+        }
+    }
+}
 
 
 function kockaHatter(kockaID, sorvalt, oszlopvalt, oszlopmegad, idtobbszamu){     //sorvalt: sorváltoztatás +1/-1 stb.    oszlopvalt: oszlopváltoztatás: +1/-1

@@ -3,7 +3,7 @@ let SpeechRecognition = webkitSpeechRecognition;
 let resultI = 0;
 const recognition = new SpeechRecognition();
 
-recognition.lang = 'hu-HU';
+recognition.lang = sessionStorage.getItem('lang') || 'en-US';
 recognition.continuous = true;
 
 recognition.onstart = function() {
@@ -57,10 +57,6 @@ function speechSetting(){
             }
             break;
     }
-}
-
-function asdd(){
-    console.log(Szinezes)
 }
 
 function felismertSzin(color){
