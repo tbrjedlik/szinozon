@@ -63,13 +63,13 @@ function toggleColorblindType(type) {
     if (colorblindMode) {
         switch (type) {
             case 'protanopia':
-                setColorblindColors("rgb(255, 100, 50)", "rgb(140, 50, 230)", "rgb(255, 150, 230)", "rgb(255, 170, 80)", "rgb(0, 200, 150)", "blue", "yellow", "red");
+                setColorblindColors("rgb(255, 100, 50)", "rgb(140, 50, 230)", "rgb(255, 150, 230)", "rgb(255, 170, 80)", "rgb(0, 200, 150)", "rgb(0, 0, 255)", "rgb(255, 255, 0)", "white");
                 break;
             case 'deutranopia':
-                setColorblindColors("rgb(200, 50, 50)", "rgb(150, 0, 200)", "rgb(255, 150, 200)", "rgb(255, 140, 0)", "rgb(0, 170, 170)", "rgb(0, 0, 255)", "rgb(255, 255, 0)", "red");
+                setColorblindColors("rgb(200, 50, 50)", "rgb(150, 0, 200)", "rgb(255, 150, 200)", "rgb(255, 140, 0)", "rgb(0, 170, 170)", "rgb(0, 0, 255)", "rgb(255, 255, 0)", "white");
                 break;
             case 'tritanopia':
-                setColorblindColors("rgb(255, 0, 0)", "rgb(200, 50, 200)", "rgb(255, 120, 180)", "rgb(255, 100, 50)", "rgb(0, 150, 100)", "rgb(140, 0, 255)", "rgb(150, 200, 0)", "rgb(255, 255, 255)");
+                setColorblindColors("rgb(255, 0, 0)", "rgb(200, 50, 200)", "rgb(255, 120, 180)", "rgb(255, 100, 50)", "rgb(0, 150, 100)", "rgb(140, 0, 255)", "rgb(150, 200, 0)", "white");
                 break;
             case 'achromatopsia':
                 setAchromatopsiaColors();
@@ -113,7 +113,7 @@ function setAchromatopsiaColors() {
             case 'sarga': element.innerHTML = "Y"; break;
             case 'kek': element.innerHTML = "B"; break;
             case 'zold': element.innerHTML = "G"; break;
-            case 'lila': element.innerHTML = "P"; break;
+            case 'lila': element.innerHTML = "L"; break;
             case 'feher': element.innerHTML = "W"; break;
             case 'narancs': element.innerHTML = "O"; break;
             case 'rozsaszin': element.innerHTML = "P"; break;
@@ -131,7 +131,7 @@ function setAchromatopsiaColors() {
             case 'sarga': element.innerHTML = "Y"; break;
             case 'kek': element.innerHTML = "B"; break;
             case 'zold': element.innerHTML = "G"; break;
-            case 'lila': element.innerHTML = "P"; break;
+            case 'lila': element.innerHTML = "L"; break;
             case 'feher': element.innerHTML = "W"; break;
             case 'narancs': element.innerHTML = "O"; break;
             case 'rozsaszin': element.innerHTML = "P"; break;
