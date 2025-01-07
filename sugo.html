@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Színkitalálós Játék</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body onload="gameStartup()">
+    <button class="close-button" onclick="window.location.href='settings.html';">&times;</button>
+    <div class="container">
+        <h1>Színözön</h1>
+        <h2>Projekt leírása</h2>
+        <p>A <span class="highlight">Színözön</span> egy logikai játék, amely a klasszikus <span class="highlight">Mastermind</span> szabályaira épül. A játék célja, hogy a felhasználó kitalálja a számítógép által véletlenszerűen kiválasztott titkos színkombinációt. A próbálkozások után a játék visszajelzéseket ad fekete és fehér pöttyök formájában, amelyek segítenek közelebb kerülni a megoldáshoz.</p>
+        <h2>Játékszabályok</h2>
+        <h3>1. Titkos kombináció kiválasztása</h3>
+        <ul>
+            <li>A számítógép véletlenszerűen generál egy színkombinációt.</li>
+            <li>A kombináció 4-5 színből állhat, és ugyanaz a szín többször is szerepelhet.</li>
+        </ul>
+        <h3>2. Próbálkozások</h3>
+        <ul>
+            <li>A játékos minden próbálkozásnál elhelyez egy színkombinációt a táblán.</li>
+            <li>A visszajelzések alapján megpróbálja egyre pontosabban kitalálni a titkos kombinációt.</li>
+        </ul>
+        <h3>3. Visszajelzések</h3>
+        <ul>
+            <li>Fekete pötty: Egy szín helyes helyen van.</li>
+            <li>Fehér pötty: Egy szín helytelen helyen van, de szerepel a kombinációban.</li>
+            <li>A pöttyök nem árulják el, hogy pontosan melyik korongra vonatkoznak.</li>
+        </ul>
+        <h3>4. A játék vége</h3>
+        <ul>
+            <li>A játékos nyer, ha sikerül kitalálnia a titkos kombinációt.</li>
+            <li>Ha elfogynak a próbálkozások, a titkos kombináció lelepleződik.</li>
+        </ul>
+        <hr>
+        <h2>Játékmenet</h2>
+        <p>1. A játékos elhelyez egy színkombinációt a táblán.</p>
+        <p>2. Az elrendezés megerősítése után a számítógép visszajelzést ad fekete és fehér pöttyök formájában.</p>
+        <p>3. A visszajelzések alapján az új próbálkozásokat úgy kell módosítani, hogy közelebb kerüljenek a megoldáshoz:</p>
+        <ul>
+            <li>A helyes színeket a megfelelő pozícióban érdemes megtartani.</li>
+            <li>Azokat a színeket, amelyek rossz helyen vannak, át kell helyezni.</li>
+        </ul>
+        <p>4. A folyamat addig folytatódik, amíg a titkos kombináció ki nem derül, vagy a próbálkozások el nem fogynak.</p>
+        <hr>
+        <h2>Fejlesztési környezet</h2>
+        <ul>
+            <li>Nyelv: JavaScript / HTML / CSS</li>
+            <li>Környezet: Bármilyen modern böngésző</li>
+            <li>Szerkesztő: Visual Studio Code</li>
+        </ul>
+    </div>
+    <script src="js/gameplay.js"></script>
+    <script src="js/colorblind.js"></script>
+    <script src="js/speech.js"></script>
+</body>
+</html>

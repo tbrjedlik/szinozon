@@ -37,6 +37,11 @@ nav a {
     text-transform: uppercase;
 }
 
+nav img {
+    width: 50px;
+    position: absolute;
+}
+
 .kocka {
     width: 45px;
     height: 45px;
@@ -321,6 +326,86 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
     border: 1px solid #e7ebee;
     box-shadow: -407px 0px 0px 400px #5469d4;
+}
+
+.sugojel a {
+    text-decoration: none;
+    font-weight: bold;
+    float: right;
+    color: white;
+    font-size: 50px;
+    padding: 4.5px 25px;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-top: 30%;
+    margin-right: 100px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.highlight {
+    font-weight: bold;
+    color: #d9534f;
+}
+
+.container hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+}
+
+.container h1, h2, h3 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.container h1 {
+    font-size: 2.5rem;
+}
+
+.container h2, h3 {
+    font-size: 1.5rem;
+}
+
+.container p, li {
+    line-height: 1.6;
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.container ul {
+    margin-left: 20px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.close-button:hover {
+    background-color: #c9302c;
 }
 
 #kek {
