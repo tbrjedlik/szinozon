@@ -305,6 +305,10 @@ function jatekVegetErt(megmaradtProbalkozas){
     else{
         elertPont = pontszamitas(megmaradtProbalkozas)
 
+        if (elertPont < 0){
+            elertPont = 0;
+        }
+
         if (elertPont > legjobbPontszam){
             legjobbPontszam = elertPont;
         }
