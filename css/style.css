@@ -19,6 +19,7 @@
 body{
     background-color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 1000px;
 }
 
 nav ul {
@@ -62,14 +63,14 @@ nav img {
     padding-bottom: 0px;
     height: fit-content;
     position: absolute;
-    top: 60px;
+    top: 100px;
     left: 700px;
 }
 
 .terulet, #valasz {
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 #megfejtes {
